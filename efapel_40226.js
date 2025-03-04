@@ -12,24 +12,24 @@ const ea = exposes.access;
 
 const definition = {
   fingerprint: [
-    {endpoint: "8", modelID: '0110', ieeeAddr: /^0x00124b001cdf3456$/}, // Kitchen Cabinets and Overhead Lights
-    {endpoint: "8", modelID: '0110', ieeeAddr: /^0x00124b001cdf1234$/} // Kitchen Indirect and Chandelier Lights
+    {endpoint: "8", modelID: '0110', ieeeAddr: /^0x00124b001cdf3456$/}, // Entry Light Switch
+    {endpoint: "8", modelID: '0110', ieeeAddr: /^0x00124b001cdf1234$/} // North Upstairs Light Switch
   ],
-  model: "40214",
+  model: "40226",
   vendor: "EFAPEL-Domus40",
-  description: "2 Circuit Switch Metering D40",
+  description: "4-Gang Push Button D40",
   exposes: [
-    e.light().withEndpoint('circuit_1'),
-    e.light().withEndpoint('circuit_2'),
+    e.switch().withEndpoint('left'),
+    e.switch().withEndpoint('right'),
   ],
   fromZigbee: [fz.livolo_switch_state, fz.livolo_switch_state_raw, fz.livolo_new_switch_state_4gang],
   toZigbee: [tz.light_onoff_brightness, tz.livolo_socket_switch_on_off],
   // toZigbee: [tz.light_onoff_brightness], //working
   endpoint: (device) => {
-      return {circuit_1: 21, circuit_2: 22};
+      return {left: 8, right: 82};
   },
   configure: async (device, coordinatorEndpoint, logger) => {
-    const endpoint = device.getEndpoint(21);
+    const endpoint = device.getEndpoint(8);
     const options = {transactionSequenceNumber: 0, srcEndpoint: 8, disableResponse: true, disableRecovery: true};
     await endpoint.command('genOnOff', 'toggle', {}, options);
   }
@@ -37,4 +37,3 @@ const definition = {
 };
 
 module.exports = definition;
-
