@@ -34,6 +34,7 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 - 40214
 - 40215
 - 40218
+- 40226
 
 ## Issues
 
