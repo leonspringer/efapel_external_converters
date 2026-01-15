@@ -40,7 +40,6 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 I need help with the following aspects of these external converters:
 
 - Device fingerprinting by IEEE Address is not ideal. Grouping them by model would be better.
-~~ - State of the switches is not supported at the moment.~~ 
 - Some of these devices have energy monitoring included, which is currently not supported.
 
 
