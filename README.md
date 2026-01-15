@@ -18,7 +18,7 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 
 1. Pair devices with your coordinator in Zigbee2MQTT. Instructions to bind buttons together can be found in the manual: [Efapel Manuals on manualslib.com](https://www.manualslib.com/brand/efapel/).
 2. Make note of the IEEE Address of the paired device, e.g., `0x00124b001cdf1234`.
-3. Edit the fingerprint section in the matching external converter file for the model with the IEEE Address of your device.
+3. Add the IEEE Address to the `EFAPEL_<MODEL>_DEVICES` list in the matching external converter file for your device model.
 4. Restart Zigbee2MQTT and check the logs in the filesystem (not the UI) for any issues. A successful load of the converters should look something like this:
 
     ```
@@ -40,7 +40,7 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 I need help with the following aspects of these external converters:
 
 - Device fingerprinting by IEEE Address is not ideal. Grouping them by model would be better.
-- State of the switches is not supported at the moment.
+~~ - State of the switches is not supported at the moment.~~ 
 - Some of these devices have energy monitoring included, which is currently not supported.
 
 
