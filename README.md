@@ -11,22 +11,59 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 
 ## Installation
 
-1. Create an `external_converter` directory if it doesn't exist in the Zigbee2MQTT home directory. For example: `config/zigbee2mqtt/external_converters/`.
-2. Copy the necessary files to the directory.
+### Step 1: Download the Release
+1. Go to the [Releases page](https://github.com/leonspringer/efapel_external_converters/releases) on GitHub.
+2. Find the latest release version (e.g., v0.2.0).
+3. Download the `Source code (zip)` file.
+4. Unzip the downloaded file to a folder on your computer.
+
+### Step 2: Copy the Converter Files
+1. Open the unzipped folder - you should see files named `efapel_40213.js`, `efapel_40214.js`, etc.
+2. On your system running Zigbee2MQTT, navigate to: `config/zigbee2mqtt/external_converters/`
+   - If the `external_converters` folder doesn't exist, create it.
+   - Note: On Home Assistant, this is typically at: `/homeassistant/zigbee2mqtt/external_converters/` or `config/zigbee2mqtt/external_converters/`
+3. Copy the `.js` files from the unzipped folder into the `external_converters` directory.
+
+### Step 3: Restart Zigbee2MQTT
+1. In Home Assistant or Zigbee2MQTT, restart the Zigbee2MQTT service/add-on.
+2. Check the logs to confirm the converters loaded successfully. You should see messages like:
+    ```
+    [2025-01-30 19:50:36] info: z2m: Loaded external converter 'efapel_40213.js'.
+    [2025-01-30 19:50:36] info: z2m: Loaded external converter 'efapel_40214.js'.
+    [2025-01-30 19:50:36] info: z2m: Loaded external converter 'efapel_40215.js'.
+    [2025-01-30 19:50:36] info: z2m: Loaded external converter 'efapel_40218.js'.
+    [2025-01-30 19:50:36] info: z2m: Loaded external converter 'efapel_40226.js'.
+    ```
 
 ## Usage
 
-1. Pair devices with your coordinator in Zigbee2MQTT. Instructions to bind buttons together can be found in the manual: [Efapel Manuals on manualslib.com](https://www.manualslib.com/brand/efapel/).
-2. Make note of the IEEE Address of the paired device, e.g., `0x00124b001cdf1234`.
-3. Add the IEEE Address to the `EFAPEL_<MODEL>_DEVICES` list in the matching external converter file for your device model.
-4. Restart Zigbee2MQTT and check the logs in the filesystem (not the UI) for any issues. A successful load of the converters should look something like this:
+1. **Pair your Efapel device** with Zigbee2MQTT:
+   - In the Zigbee2MQTT UI, enable pairing mode.
+   - Put your Efapel device into pairing mode (instructions in the device manual: [Efapel Manuals](https://www.manualslib.com/brand/efapel/)).
+   - Wait for the device to appear in Zigbee2MQTT.
 
-    ```
-    [2025-01-30 19:50:36] info: 	z2m: Loaded external converter 'efapel_40213.js'.
-    [2025-01-30 19:50:36] info: 	z2m: Loaded external converter 'efapel_40214.js'.
-    [2025-01-30 19:50:36] info: 	z2m: Loaded external converter 'efapel_40215.js'.
-    [2025-01-30 19:50:36] info: 	z2m: Loaded external converter 'efapel_40218.js'.
-    ```
+2. **Find your device's IEEE Address**:
+   - In the Zigbee2MQTT UI, click on your newly paired device.
+   - Look for the IEEE Address field - it will look something like `0x00124b001cdf1234`.
+   - Copy this address.
+
+3. **Add the device to the converter file**:
+   - Open the appropriate converter file for your device model (e.g., `efapel_40218.js` for model 40218).
+   - Find the `EFAPEL_<MODEL>_DEVICES` list at the top of the file.
+   - Add your device's IEEE Address to this list:
+     ```javascript
+     const EFAPEL_40218_DEVICES = [
+       '0x00124b00445566aa',  // Study Wall Switch
+       '0x00124b00445566bb',  // Garage Switch
+       '0x00124b00445566cc',  // Entry Way Switch
+       '0xYOUR_IEEE_ADDRESS', // Your Device (replace with actual address)
+     ];
+     ```
+   - Save the file.
+
+4. **Restart Zigbee2MQTT** again to apply the changes.
+
+5. **Test your device** - You should now be able to see the state of your switch and control it from Home Assistant or Zigbee2MQTT.
 
 ## Supported Models
 
