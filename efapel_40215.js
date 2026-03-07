@@ -10,7 +10,6 @@ const fz = require('zigbee-herdsman-converters/converters/fromZigbee');
 const tz = require('zigbee-herdsman-converters/converters/toZigbee');
 const exposes = require('zigbee-herdsman-converters/lib/exposes');
 const reporting = require('zigbee-herdsman-converters/lib/reporting');
-const ota = require('zigbee-herdsman-converters/lib/ota');
 const utils = require('zigbee-herdsman-converters/lib/utils');
 const globalStore = require('zigbee-herdsman-converters/lib/store');
 const e = exposes.presets;
