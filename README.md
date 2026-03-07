@@ -73,6 +73,22 @@ An external converter for Efapel Domus40 to Zigbee2MQTT. This information was cr
 - 40218
 - 40226
 
+## Troubleshooting
+
+### Converter Files Renamed to `.invalid`
+If the external converters don't load properly, Zigbee2MQTT will automatically rename them from `efapel_40xxx.js` to `efapel_40xxx.js.invalid`. This prevents them from being loaded.
+
+**Common reasons and solutions:**
+- **Syntax error in the converter file** - Check for typos or formatting issues in the code
+- **Device IEEE Address not properly formatted** - Ensure addresses follow the format `0x00124b00xxxxxxxx` (with quotes)
+- **Files in wrong directory** - Double-check that files are in `zigbee2mqtt/external_converters/`
+
+**To fix:**
+1. Rename the `.invalid` files back to their original `.js` names
+2. Restart Zigbee2MQTT
+3. Check the Zigbee2MQTT logs for specific error messages that explain why the file failed to load
+4. Correct the issue and restart Zigbee2MQTT
+
 ## Issues
 
 I need help with the following aspects of these external converters:
